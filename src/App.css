@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    background-color: aquamarine;
+    font-size: 30px;
+    height: 50px;
+}
+
+.gif-container {
+    display: flex;
+    margin: 50px;
+    justify-content: space-evenly;
+}
+
+.gif {
+    border: 3px solid green;
+    height: 200px;
+    width: 200px;
+    margin: 10px;
+}
