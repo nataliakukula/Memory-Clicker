@@ -1,11 +1,10 @@
 import React from 'react';
 
 export default (props) => {
-    console.log(props);
 
     return (
 
-        <img src={props.src} alt="gif" />
+        <img className="gif" src={props.src} alt="gif" onClick={() => props.handleGifClick(props.id)} />
 
     )
 }

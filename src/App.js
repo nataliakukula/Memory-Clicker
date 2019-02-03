@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Gif from './components/Gif';
+import Directions from './components/Directions';
+
 //Importing images to display:
 import gif1 from './images/gif-1.gif'
 import gif2 from './images/gif-2.gif'
@@ -21,9 +23,29 @@ class App extends Component {
   state = {
     currentScore: 0,
     topScore: 0,
-    message: "You've guesses correctly!",
-    gifs: [gif1, gif2, gif3, gif4, gif5, gif6, gif7, gif8, gif9, gif10, gif11, gif12]
+    message: "You've guessed correctly!",
+    gifs: [
+      { id: 1, src: gif1 },
+      { id: 2, src: gif2 },
+      { id: 3, src: gif3 },
+      { id: 4, src: gif4 },
+      { id: 5, src: gif5 },
+      { id: 6, src: gif6 },
+      { id: 7, src: gif7 },
+      { id: 8, src: gif8 },
+      { id: 9, src: gif9 },
+      { id: 10, src: gif10 },
+      { id: 11, src: gif11 },
+      { id: 12, src: gif12 },
+    ]
   }
+
+  handleGifClick = (id) => {
+    console.log("I've been clicked: ", id);
+    //check to see if this has been clicked before?
+    // this.state.gifs.forEach(gif) => {
+    // }
+  };
 
   render() {
     return (
@@ -33,9 +55,10 @@ class App extends Component {
           topScore={this.state.topScore}
           message={this.state.message}
         />
+        <Directions />
         <div className="gif-container">
           {this.state.gifs.map((gif, i) => (
-            <Gif key={i} src={gif} />
+            <Gif key={i} src={gif.src} id={gif.id} handleGifClick={this.handleGifClick} />
           ))}
         </div>
       </div>
