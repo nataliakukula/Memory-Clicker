@@ -3,48 +3,68 @@ import './App.css';
 import Header from './components/Header';
 import Gif from './components/Gif';
 import Directions from './components/Directions';
-
-//Importing images to display:
-import gif1 from './images/gif-1.gif'
-import gif2 from './images/gif-2.gif'
-import gif3 from './images/gif-3.gif'
-import gif4 from './images/gif-4.gif'
-import gif5 from './images/gif-5.gif'
-import gif6 from './images/gif-6.gif'
-import gif7 from './images/gif-7.gif'
-import gif8 from './images/gif-8.gif'
-import gif9 from './images/gif-9.gif'
-import gif10 from './images/gif-10.gif'
-import gif11 from './images/gif-11.gif'
-import gif12 from './images/gif-12.gif'
+import images from './images';
 
 class App extends Component {
 
   state = {
     currentScore: 0,
     topScore: 0,
-    message: "You've guessed correctly!",
-    gifs: [
-      { id: 1, src: gif1 },
-      { id: 2, src: gif2 },
-      { id: 3, src: gif3 },
-      { id: 4, src: gif4 },
-      { id: 5, src: gif5 },
-      { id: 6, src: gif6 },
-      { id: 7, src: gif7 },
-      { id: 8, src: gif8 },
-      { id: 9, src: gif9 },
-      { id: 10, src: gif10 },
-      { id: 11, src: gif11 },
-      { id: 12, src: gif12 },
-    ]
+    message: "",
+    gifs: images,
+    clicked: []
   }
 
   handleGifClick = (id) => {
-    console.log("I've been clicked: ", id);
-    //check to see if this has been clicked before?
-    // this.state.gifs.forEach(gif) => {
-    // }
+    // Creating a new copy of clicked array by .slice()
+    let clicked = this.state.clicked.slice(0);
+    //Check if an element was already clicked by comparing values of id's
+    const clickCheck = clickedElement => id === clickedElement;
+    //.findIndex() array method takes a call back function(with an element, index, array)
+    // and retuns the index of first instance from the array
+    // -1 is retuned when item is not found and is pushed to the clicked array
+    if (clicked.findIndex(clickCheck) === -1) {
+
+      clicked.push(id);
+      //you win
+      (clicked.length === 12) ?
+        this.setState({
+          "currentScore": this.state.currentScore + 1,
+          "topScore": clicked.length,
+          "message": "Woohoo, you win!",
+        })
+        :
+        //update current score
+        this.setState({
+          "currentScore": this.state.currentScore + 1,
+          "message": "Good click, keep going!",
+          "clicked": clicked
+        })
+    } else if (clicked.length > this.state.topScore) {
+      // update new top score and start over
+      this.setState({
+        "topScore": clicked.length,
+        "currentScore": 0,
+        "message": "Double click, you lose!",
+        "clicked": []
+      })
+
+    } else {
+      // start over
+      this.setState({
+        "currentScore": 0,
+        "message": "Double click, you lose!",
+        "clicked": []
+      })
+    };
+    // Mix gifs by array.sort() -> takes a call back comparison function to sort numerically (positve asc., negavite desc.)
+    // Math.random() - 0.5 works here to randomize, because it equally retuns negative and postive numbers
+    let gifs = this.state.gifs.slice(0);
+    console.log(gifs);
+    gifs.sort(() => Math.random() - 0.5);
+    console.log(gifs);
+    // the new random array is set in the place of the original gifs
+    this.setState({ gifs });
   };
 
   render() {
@@ -58,7 +78,12 @@ class App extends Component {
         <Directions />
         <div className="gif-container">
           {this.state.gifs.map((gif, i) => (
-            <Gif key={i} src={gif.src} id={gif.id} handleGifClick={this.handleGifClick} />
+            <Gif
+              key={i}
+              src={gif.src}
+              id={gif.id}
+              handleGifClick={this.handleGifClick}
+            />
           ))}
         </div>
       </div>
