@@ -24,7 +24,7 @@
 .directions-container {
    padding-top: 150px;
     height: 320px;
-    background-color: rgb(127, 255, 212, 0.5);
+    background-color: rgba(219, 224, 223, 0.5);
     font-size: 60px;
     font-weight: 150;
     text-align: center;
@@ -50,4 +50,14 @@
 
 .gif:hover {
     box-shadow: 3px 6px 45px 12px rgba(0,0,0,0.9);
+}
+
+footer {
+    color: rgba(0,0,0,0.7);
+    background-color: rgb(127, 255, 212, 0.7);
+    box-shadow: 3px 6px 45px 12px rgba(0,0,0,0.9);
+    text-align: end;
+    padding: 10px;
+    font-size: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }

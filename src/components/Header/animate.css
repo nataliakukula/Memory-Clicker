@@ -1,0 +1,18 @@
+.animate-message {
+    -webkit-animation-name: message; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    animation-name: message;
+    animation-duration: 1s;
+  }
+  
+  /* Safari 4.0 - 8.0 */
+  @-webkit-keyframes message {
+    from {color: green;}
+    to {color: aqua;}
+  }
+  
+  /* Standard syntax */
+  @keyframes message {
+    from {color: green;}
+    to {color: aqua;}
+  }
